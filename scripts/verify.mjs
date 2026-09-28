@@ -49,9 +49,12 @@ check('vision is rendered exactly once',
   `${(corpus.match(/\{VISION\}/g) || []).length} occurrence(s)`)
 check('mission highlights all occur in the mission',
   C.MISSION_HIGHLIGHTS.every((w) => C.MISSION.includes(w)))
-check('five core values, as given',
+check('six core values, as given',
   JSON.stringify(C.VALUES) ===
-    JSON.stringify(['Communication', 'Humility', 'Trustworthiness', 'Privacy', 'Adaptability']))
+    JSON.stringify([
+      'Communication', 'Humility', 'Trustworthiness',
+      'Privacy', 'Adaptability', 'Community Service',
+    ]))
 check('five consulting areas, in order',
   JSON.stringify(C.CONSULTING.map((a) => a.title)) ===
     JSON.stringify([

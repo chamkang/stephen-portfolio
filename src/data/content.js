@@ -175,13 +175,14 @@ export const PROJECTS = [
   },
 ]
 
-/* Brief: "Core Values" — the five words, as given. */
+/* Brief: "Core Values", as given. Community Service was added later. */
 export const VALUES = [
   'Communication',
   'Humility',
   'Trustworthiness',
   'Privacy',
   'Adaptability',
+  'Community Service',
 ]
 
 /* Brief: "About the founder". */
