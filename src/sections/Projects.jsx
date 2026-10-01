@@ -16,8 +16,8 @@ function Entry({ item }) {
         {item.place && <p className="meta mt-[2px]">{item.place}</p>}
       </div>
 
-      <div className="col-span-12 md:col-span-6 md:col-start-7">
-        <span className="eyebrow t-dim block mb-[8px]">{item.tag}</span>
+      <div className="col-span-12 md:col-span-6 md:col-start-7 empty:hidden">
+        {item.tag && <span className="eyebrow t-dim block mb-[8px]">{item.tag}</span>}
         {item.note && <p className="copy max-w-[54ch]">{item.note}</p>}
       </div>
     </Reveal>

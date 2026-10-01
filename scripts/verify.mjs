@@ -49,12 +49,17 @@ check('vision is rendered exactly once',
   `${(corpus.match(/\{VISION\}/g) || []).length} occurrence(s)`)
 check('mission highlights all occur in the mission',
   C.MISSION_HIGHLIGHTS.every((w) => C.MISSION.includes(w)))
-check('six core values, as given',
+check('nine core values, as given',
   JSON.stringify(C.VALUES) ===
     JSON.stringify([
       'Communication', 'Humility', 'Trustworthiness',
       'Privacy', 'Adaptability', 'Community Service',
-    ]))
+      'Servant Leadership', 'Teamwork', 'Transparency',
+    ]), C.VALUES.length + ' values')
+check('BSc is in Management',
+  C.CREDENTIALS.find((c) => c.abbr === 'BSc').title === 'Bachelor of Science (BSc) in Management')
+check('schools take the definite article',
+  C.BIO.includes('the Aberdeen Business School at the Robert Gordon University'))
 check('five consulting areas, in order',
   JSON.stringify(C.CONSULTING.map((a) => a.title)) ===
     JSON.stringify([
@@ -66,8 +71,9 @@ check('every consulting area has something to show, or is known to be bare',
 check('credentials are MSc, BSc, IPMA, AML — no PMP',
   JSON.stringify(C.CREDENTIALS.map((c) => c.abbr)) === JSON.stringify(['MSc', 'BSc', 'IPMA', 'AML']),
   C.CREDENTIALS.map((c) => c.abbr).join(', '))
-check('nine projects in two groups',
-  C.PROJECTS.length === 2 && C.PROJECTS.flatMap((g) => g.items).length === 9)
+check('ten projects in two groups',
+  C.PROJECTS.length === 2 && C.PROJECTS.flatMap((g) => g.items).length === 10,
+  C.PROJECTS.map((g) => `${g.group}: ${g.items.length}`).join(', '))
 
 // Wording that was invented in earlier drafts, or facts that are wrong
 // (old email, assumed locations). None of it may come back.

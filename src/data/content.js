@@ -36,7 +36,7 @@ export const SECTIONS = [
 
 /* Brief: "About the founder". */
 export const BIO =
-  'Stephen holds an MSc in Project Management from Aberdeen Business School at Robert Gordon University, Scotland, United Kingdom, as well as the IPMA (APM) Level D certification. He has also undergone professional formation on how to detect money-laundering activities from stakeholders associated with the finance sector.'
+  'Stephen holds an MSc in Project Management from the Aberdeen Business School at the Robert Gordon University, Scotland, United Kingdom, as well as the IPMA (APM) Level D certification. He has also undergone professional formation on how to detect money-laundering activities from stakeholders associated with the finance sector.'
 
 /* Brief: "VISION" — verbatim. */
 export const VISION =
@@ -48,6 +48,9 @@ export const MISSION =
   'Collaborating effectively with private and public sector organisations in designing, initiating, and delivering customer-centric projects.'
 
 export const MISSION_HIGHLIGHTS = ['designing', 'initiating', 'delivering']
+
+/* Added by the client, shown beneath the mission statement. */
+export const MISSION_NOTE = 'Initiating before designing'
 
 /* Brief: the three quoted lines that follow the mission. */
 export const MISSION_POINTS = [
@@ -130,6 +133,13 @@ export const PROJECTS = [
         note: 'A construction company that executes public road construction projects across the national territory of Cameroon. Main focus: utilising Gantt charts to plan construction materials for the different phases of the construction projects.',
       },
       {
+        role: 'AI Product Owner',
+        org: 'St. Sylvester Clinic',
+        place: 'Douala, Cameroon',
+        tag: null,
+        note: null,
+      },
+      {
         role: 'Project Trainer',
         org: 'The Environmental Protection and Development Association (EPDA)',
         place: null,
@@ -183,6 +193,9 @@ export const VALUES = [
   'Privacy',
   'Adaptability',
   'Community Service',
+  'Servant Leadership',
+  'Teamwork',
+  'Transparency',
 ]
 
 /* Brief: "About the founder". */
@@ -190,14 +203,12 @@ export const CREDENTIALS = [
   {
     abbr: 'MSc',
     title: 'MSc in Project Management',
-    body: 'Aberdeen Business School, Robert Gordon University, Scotland, United Kingdom.',
+    body: 'The Aberdeen Business School, the Robert Gordon University, Scotland, United Kingdom.',
   },
   {
-    // Supplied as "Bachelor of Science( MSc.) in Project Management". MSc is
-    // Master of Science and is already listed above, so this is shown as a
-    // bachelor's degree. No institution was given. See README.
+    // No awarding institution was supplied for this one. See README.
     abbr: 'BSc',
-    title: 'Bachelor of Science (BSc) in Project Management',
+    title: 'Bachelor of Science (BSc) in Management',
     body: null,
   },
   {

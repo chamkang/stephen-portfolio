@@ -7,6 +7,7 @@ import {
   VISION,
   MISSION,
   MISSION_HIGHLIGHTS,
+  MISSION_NOTE,
   MISSION_POINTS,
 } from '../data/content'
 
@@ -49,6 +50,12 @@ export default function About() {
             <span className="eyebrow t-dim block mb-[18px]">Mission</span>
             <p className="display-md t-ink text-[clamp(1.55rem,3vw,2.6rem)]">
               <Mission />
+            </p>
+            <p
+              className="display-it t-ink text-[clamp(1.1rem,1.6vw,1.45rem)] mt-[26px] pl-[18px] border-l-2"
+              style={{ borderColor: 'var(--ochre)' }}
+            >
+              “{MISSION_NOTE}”
             </p>
           </Reveal>
 

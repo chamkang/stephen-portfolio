@@ -6,8 +6,8 @@ import { IDENTITY } from '../data/content'
 const FULL_NAME = [IDENTITY.first, IDENTITY.last].filter(Boolean).join(' ')
 
 const STAMPS = [
-  ['MSc', 'Project Management, Robert Gordon University'],
-  ['BSc', 'Project Management'],
+  ['MSc', 'Project Management, the Robert Gordon University'],
+  ['BSc', 'Management'],
   ['IPMA Level D', 'IPMA (APM) Level D Certification'],
 ]
 
