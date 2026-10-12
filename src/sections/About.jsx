@@ -36,7 +36,14 @@ export default function About() {
       <div className="grid grid-cols-12 gap-x-[clamp(20px,3vw,56px)] gap-y-[8vh] items-start">
         <div className="col-span-12 lg:col-span-7">
           <Reveal>
-            <p className="lede t-ink max-w-[46ch]">{BIO}</p>
+            {BIO.map((para, i) => (
+              <p
+                key={para}
+                className={i === 0 ? 'lede t-ink max-w-[46ch]' : 'copy max-w-[58ch] mt-[18px]'}
+              >
+                {para}
+              </p>
+            ))}
           </Reveal>
 
           <Reveal className="mt-[8vh]">

@@ -5,7 +5,7 @@ import WhatsAppButton from './components/WhatsAppButton'
 import Masthead from './sections/Masthead'
 import About from './sections/About'
 import Consulting from './sections/Consulting'
-import Projects from './sections/Projects'
+import Experience from './sections/Experience'
 import Values from './sections/Values'
 import Credentials from './sections/Credentials'
 import Contact from './sections/Contact'
@@ -19,7 +19,7 @@ export default function App() {
         <Masthead />
         <About />
         <Consulting />
-        <Projects />
+        <Experience />
         <Values />
         <Credentials />
         <Contact />

@@ -59,7 +59,7 @@ check('nine core values, as given',
 check('BSc is in Management',
   C.CREDENTIALS.find((c) => c.abbr === 'BSc').title === 'Bachelor of Science (BSc) in Management')
 check('schools take the definite article',
-  C.BIO.includes('the Aberdeen Business School at the Robert Gordon University'))
+  C.BIO.join(' ').includes('the Aberdeen Business School at the Robert Gordon University'))
 check('five consulting areas, in order',
   JSON.stringify(C.CONSULTING.map((a) => a.title)) ===
     JSON.stringify([
@@ -71,9 +71,19 @@ check('every consulting area has something to show, or is known to be bare',
 check('credentials are MSc, BSc, IPMA, AML — no PMP',
   JSON.stringify(C.CREDENTIALS.map((c) => c.abbr)) === JSON.stringify(['MSc', 'BSc', 'IPMA', 'AML']),
   C.CREDENTIALS.map((c) => c.abbr).join(', '))
-check('ten projects in two groups',
-  C.PROJECTS.length === 2 && C.PROJECTS.flatMap((g) => g.items).length === 10,
-  C.PROJECTS.map((g) => `${g.group}: ${g.items.length}`).join(', '))
+check('experience has three groups',
+  C.EXPERIENCE.length === 3,
+  C.EXPERIENCE.map((g) => `${g.group}: ${g.items.length}`).join(', '))
+check('every role carries either responsibilities or a note',
+  C.EXPERIENCE.flatMap((g) => g.items).every((i) => i.points?.length || i.note || i.tag))
+check('professional roles are dated, newest first', (() => {
+  const dated = C.EXPERIENCE[0].items.map((i) => i.dates)
+  if (dated.some((d) => !d)) return false
+  const year = (d) => Number(d.slice(-4)) || new Date().getFullYear()
+  const starts = dated.map((d) => Number(d.split(' — ')[0].slice(-4)))
+  return starts.every((y, i) => i === 0 || starts[i - 1] >= y)
+})(), C.EXPERIENCE[0].items.map((i) => i.dates).join(' | '))
+check('bio reads as paragraphs', Array.isArray(C.BIO) && C.BIO.length >= 5)
 
 // Wording that was invented in earlier drafts, or facts that are wrong
 // (old email, assumed locations). None of it may come back.
@@ -132,7 +142,7 @@ console.log('\n── scroll state ' + '─'.repeat(50))
 const VH = 720
 const SECS = [
   ['home', 0, 720], ['about', 720, 1300], ['consulting', 2020, 1100],
-  ['projects', 3120, 2600], ['values', 5720, 1100], ['credentials', 6820, 1080],
+  ['experience', 3120, 2600], ['values', 5720, 1100], ['credentials', 6820, 1080],
   ['contact', 7900, 700],
 ]
 const DOC = 8600
