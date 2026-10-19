@@ -18,7 +18,7 @@ function Entry({ item }) {
     >
       <div className="col-span-12 md:col-span-5">
         <h3 className="display-md t-ink text-[clamp(1.2rem,2vw,1.7rem)]">{item.role}</h3>
-        {item.org && <p className="meta t-ochre mt-[8px]">{item.org}</p>}
+        {item.org && <p className="meta t-accent mt-[8px]">{item.org}</p>}
         {item.place && <p className="meta mt-[2px]">{item.place}</p>}
         {(item.dates || item.type) && (
           <p className="eyebrow t-dim mt-[12px]">
@@ -34,7 +34,7 @@ function Entry({ item }) {
           <ul className="m-0 p-0 list-none">
             {item.points.map((point) => (
               <li key={point} className="copy flex gap-[12px] py-[5px] max-w-[54ch]">
-                <span className="t-ochre" aria-hidden="true">—</span>
+                <span className="t-accent" aria-hidden="true">—</span>
                 <span>{point}</span>
               </li>
             ))}
@@ -60,7 +60,7 @@ export default function Experience() {
 
             <div className="mb-[4vh]">
               <Reveal className="mb-[16px] mt-[4vh]">
-                <h2 className="eyebrow t-ochre">{group.group}</h2>
+                <h2 className="eyebrow t-accent">{group.group}</h2>
               </Reveal>
               {group.items.map((item) => (
                 <Entry key={item.role + (item.org ?? '') + (item.dates ?? '')} item={item} />

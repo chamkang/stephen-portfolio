@@ -21,7 +21,7 @@ function Mission() {
   const pattern = new RegExp(`(${MISSION_HIGHLIGHTS.join('|')})`)
   return MISSION.split(pattern).map((part, i) =>
     MISSION_HIGHLIGHTS.includes(part) ? (
-      <em key={i} className="display-it t-ochre">{part}</em>
+      <em key={i} className="display-it t-accent">{part}</em>
     ) : (
       <Fragment key={i}>{part}</Fragment>
     )
@@ -59,7 +59,7 @@ export default function About() {
               </p>
               <p
                 className="display-it t-ink text-[clamp(1.1rem,1.6vw,1.45rem)] mt-[26px] pl-[18px] border-l-2"
-                style={{ borderColor: 'var(--ochre)' }}
+                style={{ borderColor: 'var(--gold)' }}
               >
                 “{MISSION_NOTE}”
               </p>
@@ -74,7 +74,7 @@ export default function About() {
                   className="grid grid-cols-[auto_1fr] gap-x-[clamp(18px,2.4vw,40px)] py-[clamp(18px,2.8vh,30px)] border-b"
                   style={{ borderColor: 'var(--rule)' }}
                 >
-                  <span className="display-it t-ochre text-[clamp(1.05rem,1.4vw,1.35rem)] pt-[2px] min-w-[1.6em]">
+                  <span className="display-it t-accent text-[clamp(1.05rem,1.4vw,1.35rem)] pt-[2px] min-w-[1.6em]">
                     {['i', 'ii', 'iii'][i]}
                   </span>
                   <p className="copy max-w-[52ch]">{point}</p>
@@ -105,10 +105,10 @@ export default function About() {
       {/* ── values ───────────────────────────────────────────── */}
       <section
         className="px-[6vw] py-[10vh]"
-        style={{ backgroundColor: 'rgb(234 226 212 / 0.72)' }}
+        style={{ backgroundColor: 'var(--tint)' }}
       >
         <Reveal className="flex items-center gap-[14px] mb-[5vh]">
-          <span className="block h-px w-[42px]" style={{ backgroundColor: 'var(--ochre)' }} />
+          <span className="block h-px w-[42px]" style={{ backgroundColor: 'var(--gold)' }} />
           <span className="eyebrow t-dim">Core Values</span>
         </Reveal>
 
@@ -121,10 +121,10 @@ export default function About() {
               className="group flex items-baseline gap-x-[clamp(16px,2.4vw,44px)] border-t py-[clamp(12px,1.9vh,22px)]"
               style={{ borderColor: 'var(--rule)' }}
             >
-              <span className="display-it t-ochre text-[clamp(1rem,1.3vw,1.25rem)] min-w-[2ch]">
+              <span className="display-it t-accent text-[clamp(1rem,1.3vw,1.25rem)] min-w-[2ch]">
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <span className="display t-ink text-[clamp(1.9rem,5.4vw,4.4rem)] transition-colors duration-500 group-hover:text-[var(--ochre)]">
+              <span className="display t-ink text-[clamp(1.9rem,5.4vw,4.4rem)] transition-colors duration-500 group-hover:text-[var(--gold)]">
                 {word}
               </span>
             </Reveal>
@@ -136,7 +136,7 @@ export default function About() {
       {/* ── credentials ──────────────────────────────────────── */}
       <section className="px-[6vw] py-[12vh]">
         <Reveal className="flex items-center gap-[14px] mb-[5vh]">
-          <span className="block h-px w-[42px]" style={{ backgroundColor: 'var(--ochre)' }} />
+          <span className="block h-px w-[42px]" style={{ backgroundColor: 'var(--gold)' }} />
           <span className="eyebrow t-dim">Credentials</span>
         </Reveal>
 
@@ -157,7 +157,7 @@ export default function About() {
           <div className="col-span-12 lg:col-span-7 lg:col-start-6">
             <Reveal mode="mask" className="mb-[5vh]">
               <h2 className="display t-ink text-[clamp(2rem,4.4vw,3.6rem)]">
-                Certifications &amp; <em className="display-it t-ochre">education</em>
+                Certifications &amp; <em className="display-it t-accent">education</em>
               </h2>
             </Reveal>
 
@@ -168,7 +168,7 @@ export default function About() {
                 className="grid grid-cols-12 gap-x-[clamp(14px,2vw,34px)] gap-y-[8px] border-t py-[clamp(20px,3vh,32px)]"
                 style={{ borderColor: 'var(--rule)' }}
               >
-                <span className="col-span-12 sm:col-span-2 display-it t-ochre text-[clamp(1.05rem,1.4vw,1.3rem)]">
+                <span className="col-span-12 sm:col-span-2 display-it t-accent text-[clamp(1.05rem,1.4vw,1.3rem)]">
                   {c.abbr}
                 </span>
                 <div className="col-span-12 sm:col-span-10">

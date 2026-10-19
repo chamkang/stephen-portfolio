@@ -1,17 +1,26 @@
-import { useEffect, useRef } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { store } from '../store'
 import { NAV, IDENTITY } from '../data/content'
 
 /**
- * Persistent header: wordmark, page links, and a standing call to action.
+ * One clean bar: wordmark left, links right, a single gold call to action.
  *
- * The link row scrolls sideways rather than collapsing into a menu on
- * narrow screens — five short labels fit, and a visible row beats a
- * hidden one.
+ * Below `lg` the links collapse into a full-screen navy menu rather than
+ * wrapping onto extra lines — a wrapped row of five labels reads as
+ * clutter and pushes the page down.
  */
 export default function Header() {
+  const [open, setOpen] = useState(false)
   const barRef = useRef(null)
+  const { pathname } = useLocation()
+
+  useEffect(() => setOpen(false), [pathname])
+
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [open])
 
   useEffect(() => {
     let raf = 0
@@ -23,60 +32,109 @@ export default function Header() {
     return () => cancelAnimationFrame(raf)
   }, [])
 
+  const linkStyle = ({ isActive }) => ({
+    color: isActive ? 'var(--navy)' : 'var(--dim)',
+    borderBottom: `2px solid ${isActive ? 'var(--gold)' : 'transparent'}`,
+    paddingBottom: '4px',
+  })
+
   return (
-    <header
-      className="sticky top-0 z-40"
-      style={{ backgroundColor: 'rgb(243 238 229 / 0.97)' }}
-    >
-      <div
-        className="absolute top-0 left-0 right-0 h-[2px]"
-        style={{ backgroundColor: 'var(--rule-soft)' }}
+    <>
+      <header
+        className="sticky top-0 z-40"
+        style={{ backgroundColor: 'var(--white)', boxShadow: '0 1px 0 var(--rule-soft)' }}
       >
-        <span
-          ref={barRef}
-          className="block h-full origin-left"
-          style={{ backgroundColor: 'var(--ochre)', transform: 'scaleX(0)' }}
-        />
-      </div>
+        <div className="flex items-center justify-between gap-6 px-[6vw] h-[74px]">
+          <Link to="/" className="shrink-0 leading-none">
+            <span className="display-md block text-[20px] tracking-[-0.02em]">
+              {IDENTITY.first} {IDENTITY.last}
+            </span>
+            <span className="eyebrow t-dim block mt-[5px] text-[10px]">
+              {IDENTITY.role}
+            </span>
+          </Link>
 
-      {/* Stacks on a phone, where five labels cannot sit beside the
-          wordmark. The nav wraps rather than scrolling sideways: a row
-          clipped at the edge hides pages with nothing to say so. */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-x-6 gap-y-[10px] px-[6vw] py-[12px]">
-        <Link to="/" className="shrink-0">
-          <span className="display-md t-ink block text-[19px] leading-none">
-            {IDENTITY.first} {IDENTITY.last}
-          </span>
-          <span className="meta block mt-[4px] hidden sm:block">{IDENTITY.role}</span>
-        </Link>
+          <nav aria-label="Pages" className="hidden lg:flex items-center gap-[30px]">
+            {NAV.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                className="eyebrow transition-colors duration-200"
+                style={linkStyle}
+              >
+                {item.label}
+              </NavLink>
+            ))}
+            <a href={`mailto:${IDENTITY.email}`} className="btn btn-gold ml-[6px]">
+              Get in touch
+            </a>
+          </nav>
 
-        <nav
-          aria-label="Pages"
-          className="flex flex-wrap items-center gap-x-[clamp(13px,2vw,30px)] gap-y-[8px]"
-        >
-          {NAV.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              className="eyebrow whitespace-nowrap transition-colors duration-300"
-              style={({ isActive }) => ({
-                color: isActive ? 'var(--ochre)' : 'var(--dim)',
-              })}
-            >
-              {item.label}
-            </NavLink>
-          ))}
-          <a
-            href={`mailto:${IDENTITY.email}`}
-            className="eyebrow whitespace-nowrap hidden md:inline-block px-[16px] py-[9px] rounded-full shrink-0"
-            style={{ backgroundColor: 'var(--ink)', color: 'var(--paper-warm)' }}
+          <button
+            onClick={() => setOpen((v) => !v)}
+            className="lg:hidden flex flex-col justify-center gap-[5px] w-[34px] h-[34px]"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
           >
-            Get in touch
-          </a>
-        </nav>
-      </div>
+            <span
+              className="block h-[2px] w-full transition-transform duration-300"
+              style={{
+                backgroundColor: 'var(--navy)',
+                transform: open ? 'translateY(7px) rotate(45deg)' : 'none',
+              }}
+            />
+            <span
+              className="block h-[2px] w-full transition-opacity duration-200"
+              style={{ backgroundColor: 'var(--navy)', opacity: open ? 0 : 1 }}
+            />
+            <span
+              className="block h-[2px] w-full transition-transform duration-300"
+              style={{
+                backgroundColor: 'var(--navy)',
+                transform: open ? 'translateY(-7px) rotate(-45deg)' : 'none',
+              }}
+            />
+          </button>
+        </div>
 
-      <div className="rule-h" />
-    </header>
+        <div className="h-[3px]" style={{ backgroundColor: 'var(--rule-soft)' }}>
+          <span
+            ref={barRef}
+            className="block h-full origin-left"
+            style={{ backgroundColor: 'var(--gold)', transform: 'scaleX(0)' }}
+          />
+        </div>
+      </header>
+
+      {/* ── mobile menu ──────────────────────────────────────── */}
+      <div
+        className="fixed inset-0 z-30 lg:hidden on-navy flex flex-col justify-center px-[8vw]"
+        style={{
+          backgroundColor: 'var(--navy)',
+          transform: open ? 'translateY(0)' : 'translateY(-100%)',
+          transition: 'transform 520ms cubic-bezier(0.76, 0, 0.24, 1)',
+        }}
+        aria-hidden={!open}
+      >
+        {NAV.map((item) => (
+          <NavLink
+            key={item.to}
+            to={item.to}
+            tabIndex={open ? 0 : -1}
+            className="display text-[clamp(2rem,9vw,3.4rem)] py-[10px]"
+            style={({ isActive }) => ({ color: isActive ? 'var(--gold)' : 'var(--white)' })}
+          >
+            {item.label}
+          </NavLink>
+        ))}
+        <a
+          href={`mailto:${IDENTITY.email}`}
+          tabIndex={open ? 0 : -1}
+          className="btn btn-gold mt-[28px] self-start"
+        >
+          Get in touch
+        </a>
+      </div>
+    </>
   )
 }

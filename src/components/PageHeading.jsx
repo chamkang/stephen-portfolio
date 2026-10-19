@@ -5,7 +5,7 @@ export default function PageHeading({ label, title, lede }) {
   return (
     <div className="px-[6vw] pt-[9vh] pb-[5vh]">
       <Reveal className="flex items-center gap-[14px] mb-[4vh]">
-        <span className="block h-px w-[42px]" style={{ backgroundColor: 'var(--ochre)' }} />
+        <span className="block h-px w-[42px]" style={{ backgroundColor: 'var(--gold)' }} />
         <span className="eyebrow t-dim">{label}</span>
       </Reveal>
 

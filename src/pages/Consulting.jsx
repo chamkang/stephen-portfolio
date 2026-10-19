@@ -21,7 +21,7 @@ export default function Consulting() {
               className="col-span-12 grid grid-cols-12 gap-x-[clamp(18px,2.6vw,48px)] gap-y-[12px] border-t py-[clamp(26px,4.4vh,50px)]"
               style={{ borderColor: 'var(--rule)' }}
             >
-              <span className="col-span-12 sm:col-span-1 display-it t-ochre text-[clamp(1.05rem,1.4vw,1.3rem)] pt-[4px]">
+              <span className="col-span-12 sm:col-span-1 display-it t-accent text-[clamp(1.05rem,1.4vw,1.3rem)] pt-[4px]">
                 {String(i + 1).padStart(2, '0')}
               </span>
 
@@ -44,7 +44,7 @@ export default function Consulting() {
                   <ul className="m-0 mt-[6px] p-0 list-none">
                     {area.points.map((point) => (
                       <li key={point} className="copy flex gap-[12px] py-[6px] max-w-[50ch]">
-                        <span className="t-ochre" aria-hidden="true">—</span>
+                        <span className="t-accent" aria-hidden="true">—</span>
                         <span>{point}</span>
                       </li>
                     ))}
@@ -54,7 +54,7 @@ export default function Consulting() {
                 {area.quote && (
                   <blockquote
                     className="display-it t-ink text-[clamp(1.1rem,1.5vw,1.35rem)] mt-[22px] mb-0 mx-0 pl-[18px] border-l-2 max-w-[40ch]"
-                    style={{ borderColor: 'var(--ochre)' }}
+                    style={{ borderColor: 'var(--gold)' }}
                   >
                     “{area.quote}”
                   </blockquote>

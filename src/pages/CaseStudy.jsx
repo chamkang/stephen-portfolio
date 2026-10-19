@@ -9,7 +9,7 @@ function Block({ label, heading, children }) {
     <section className="px-[6vw] py-[7vh]">
       <div className="grid grid-cols-12 gap-x-[clamp(20px,3vw,56px)] gap-y-[3vh]">
         <Reveal className="col-span-12 md:col-span-3">
-          <span className="eyebrow t-ochre">{label}</span>
+          <span className="eyebrow t-accent">{label}</span>
         </Reveal>
         <div className="col-span-12 md:col-span-8">
           {heading && (
@@ -32,7 +32,7 @@ export default function CaseStudy() {
       {/* ── opening ──────────────────────────────────────────── */}
       <section className="px-[6vw] pt-[9vh] pb-[6vh]">
         <Reveal className="flex items-center gap-[14px] mb-[4vh]">
-          <span className="block h-px w-[42px]" style={{ backgroundColor: 'var(--ochre)' }} />
+          <span className="block h-px w-[42px]" style={{ backgroundColor: 'var(--gold)' }} />
           <span className="eyebrow t-dim">{CS.kicker}</span>
         </Reveal>
 
@@ -56,7 +56,7 @@ export default function CaseStudy() {
       </section>
 
       {/* ── challenge ────────────────────────────────────────── */}
-      <div style={{ backgroundColor: 'rgb(234 226 212 / 0.72)' }}>
+      <div style={{ backgroundColor: 'var(--tint)' }}>
         <Block label={CS.challenge.label} heading={CS.challenge.heading}>
           <Reveal>
             {CS.challenge.body.map((para) => (
@@ -77,10 +77,10 @@ export default function CaseStudy() {
             <Reveal
               key={opt.n}
               className="border-t py-[clamp(24px,3.6vh,40px)]"
-              style={{ borderColor: opt.selected ? 'var(--ochre)' : 'var(--rule)' }}
+              style={{ borderColor: opt.selected ? 'var(--gold)' : 'var(--rule)' }}
             >
               <div className="flex items-baseline gap-[14px] mb-[14px] flex-wrap">
-                <span className="display-it t-ochre text-[clamp(1.05rem,1.4vw,1.3rem)]">
+                <span className="display-it t-accent text-[clamp(1.05rem,1.4vw,1.3rem)]">
                   {opt.n}
                 </span>
                 <h3 className="display-md t-ink text-[clamp(1.25rem,2.2vw,1.8rem)]">
@@ -89,7 +89,7 @@ export default function CaseStudy() {
                 {opt.selected && (
                   <span
                     className="eyebrow px-[12px] py-[6px] rounded-full"
-                    style={{ backgroundColor: 'var(--ochre)', color: 'var(--paper-warm)' }}
+                    style={{ backgroundColor: 'var(--gold)', color: 'var(--white)' }}
                   >
                     Selected
                   </span>
@@ -104,7 +104,7 @@ export default function CaseStudy() {
                 <ul className="m-0 my-[10px] p-0 list-none">
                   {opt.points.map((point) => (
                     <li key={point} className="copy flex gap-[12px] py-[4px]">
-                      <span className="t-ochre" aria-hidden="true">—</span>
+                      <span className="t-accent" aria-hidden="true">—</span>
                       <span>{point}</span>
                     </li>
                   ))}
@@ -134,7 +134,7 @@ export default function CaseStudy() {
           <p className="meta mt-[4vh] mb-[10px]">I ask:</p>
           <p
             className="display-it t-ink text-[clamp(1.45rem,2.9vw,2.4rem)] max-w-[30ch] pl-[18px] border-l-2"
-            style={{ borderColor: 'var(--ochre)' }}
+            style={{ borderColor: 'var(--gold)' }}
           >
             “{CS.approach.answer}”
           </p>
@@ -142,7 +142,7 @@ export default function CaseStudy() {
       </Block>
 
       {/* ── why clients engage ───────────────────────────────── */}
-      <div style={{ backgroundColor: 'rgb(234 226 212 / 0.72)' }}>
+      <div style={{ backgroundColor: 'var(--tint)' }}>
         <Block label={CS.why.label}>
           <Reveal>
             {CS.why.body.map((para) => (
@@ -154,20 +154,18 @@ export default function CaseStudy() {
 
       {/* ── call to action ───────────────────────────────────── */}
       <section className="px-[6vw] py-[12vh]">
-        <Reveal className="p-[clamp(26px,5vw,64px)]" style={{ backgroundColor: 'var(--ink)' }}>
+        <Reveal className="on-navy p-[clamp(26px,5vw,64px)]" style={{ backgroundColor: 'var(--navy)' }}>
           <h2
             className="display text-[clamp(1.8rem,4.2vw,3.2rem)] max-w-[20ch]"
-            style={{ color: 'var(--paper-warm)' }}
           >
             {CS.cta.heading}
           </h2>
-          <p className="copy mt-[22px] max-w-[54ch]" style={{ color: 'rgb(251 248 242 / 0.82)' }}>
+          <p className="copy mt-[22px] max-w-[54ch]" >
             {CS.cta.body}
           </p>
           <Link
             to="/contact"
-            className="eyebrow inline-block mt-[30px] px-[22px] py-[13px] rounded-full"
-            style={{ backgroundColor: 'var(--ochre)', color: 'var(--paper-warm)' }}
+            className="btn btn-gold mt-[30px]"
           >
             Contact me about your project
           </Link>

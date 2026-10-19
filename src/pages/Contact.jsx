@@ -10,13 +10,13 @@ export default function Contact() {
     >
       <section className="px-[6vw] pt-[9vh] pb-[14vh] min-h-[62svh]">
         <Reveal className="flex items-center gap-[14px] mb-[5vh]">
-          <span className="block h-px w-[42px]" style={{ backgroundColor: 'var(--ochre)' }} />
+          <span className="block h-px w-[42px]" style={{ backgroundColor: 'var(--gold)' }} />
           <span className="eyebrow t-dim">Contact</span>
         </Reveal>
 
         <Reveal mode="mask">
           <h1 className="display t-ink text-[clamp(2.2rem,6vw,5.2rem)] max-w-[16ch]">
-            Let’s talk about your <em className="display-it t-ochre">project</em>.
+            Let’s talk about your <em className="display-it t-accent">project</em>.
           </h1>
         </Reveal>
 
