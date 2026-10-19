@@ -32,11 +32,38 @@ export default function Home() {
       title={IDENTITY.role}
       description={`${FULL_NAME} — project management consulting in cost and schedule management, risk management, ERP, IT compliance and governance, and digital transformation. Based in ${IDENTITY.locale}.`}
     >
-      {/* ── hero: navy panel + portrait ──────────────────────── */}
-      <section className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] items-stretch">
+      {/* ── hero ─────────────────────────────────────────────
+          Phone: one picture, with the type and buttons laid over it.
+          Desktop: a navy panel beside the picture. */}
+      <section className="relative grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] items-stretch min-h-[86svh] lg:min-h-0">
+        {/* Not `.plate` here: that class sets position:relative and, being
+            defined after Tailwind's utilities, would beat `absolute`. */}
         <div
-          className="on-navy flex items-center px-[8vw] lg:px-[6vw] py-[clamp(56px,9vh,104px)]"
-          style={{ backgroundColor: 'var(--navy)' }}
+          className="absolute inset-0 overflow-hidden lg:static lg:order-2 lg:min-h-[clamp(340px,60vh,620px)]"
+          style={{ backgroundColor: 'var(--tint)' }}
+        >
+          <img
+            src={PORTRAITS[0].src}
+            alt={PORTRAITS[0].alt}
+            fetchPriority="high"
+            width="1200"
+            height="1600"
+            className="w-full h-full object-cover"
+            style={{ objectPosition: PORTRAITS[0].position }}
+          />
+          {/* Legibility wash, only where the type sits on the photo. */}
+          <div
+            className="absolute inset-0 lg:hidden"
+            aria-hidden="true"
+            style={{
+              background:
+                'linear-gradient(to top, rgb(19 33 69 / 0.94) 0%, rgb(19 33 69 / 0.74) 46%, rgb(19 33 69 / 0.3) 100%)',
+            }}
+          />
+        </div>
+
+        <div
+          className="relative z-10 on-navy lg:order-1 flex items-end lg:items-center px-[8vw] lg:px-[6vw] pt-[18vh] pb-[7vh] lg:py-[clamp(56px,9vh,104px)] lg:bg-[var(--navy)]"
         >
           {/* The panel is wide; only the lines inside it are measured. */}
           <div className="w-full max-w-[34rem]">
@@ -64,17 +91,6 @@ export default function Home() {
               </Link>
             </Reveal>
           </div>
-        </div>
-
-        <div className="plate min-h-[clamp(340px,60vh,620px)]">
-          <img
-            src={PORTRAITS[0].src}
-            alt={PORTRAITS[0].alt}
-            fetchPriority="high"
-            width="1200"
-            height="1600"
-            style={{ objectPosition: PORTRAITS[0].position }}
-          />
         </div>
       </section>
 

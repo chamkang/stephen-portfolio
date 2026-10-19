@@ -59,6 +59,8 @@ export default function Header() {
               <NavLink
                 key={item.to}
                 to={item.to}
+                // Without `end`, "/" would count as active on every page.
+                end={item.to === '/'}
                 className="eyebrow transition-colors duration-200"
                 style={linkStyle}
               >
@@ -120,8 +122,9 @@ export default function Header() {
           <NavLink
             key={item.to}
             to={item.to}
+            end={item.to === '/'}
             tabIndex={open ? 0 : -1}
-            className="display text-[clamp(2rem,9vw,3.4rem)] py-[10px]"
+            className="display text-[clamp(1.8rem,8vw,3rem)] py-[8px]"
             style={({ isActive }) => ({ color: isActive ? 'var(--gold)' : 'var(--white)' })}
           >
             {item.label}

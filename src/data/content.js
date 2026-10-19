@@ -24,9 +24,9 @@ const PHONE_DIGITS = IDENTITY.phone.replace(/[^\d]/g, '')
 export const PHONE_HREF = `tel:+${PHONE_DIGITS}`
 export const WHATSAPP_HREF = `https://wa.me/${PHONE_DIGITS}`
 
-/* The site's pages, in nav order. Home is the wordmark, so it is not
-   repeated here. */
+/* The site's pages, in nav order. */
 export const NAV = [
+  { to: '/', label: 'Home' },
   { to: '/about', label: 'About' },
   { to: '/consulting', label: 'Consulting' },
   { to: '/experience', label: 'Experience' },
