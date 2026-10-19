@@ -24,14 +24,14 @@ const PHONE_DIGITS = IDENTITY.phone.replace(/[^\d]/g, '')
 export const PHONE_HREF = `tel:+${PHONE_DIGITS}`
 export const WHATSAPP_HREF = `https://wa.me/${PHONE_DIGITS}`
 
-export const SECTIONS = [
-  { id: 'home', title: 'Home' },
-  { id: 'about', title: 'About' },
-  { id: 'consulting', title: 'Consulting' },
-  { id: 'experience', title: 'Experience' },
-  { id: 'values', title: 'Values' },
-  { id: 'credentials', title: 'Credentials' },
-  { id: 'contact', title: 'Contact' },
+/* The site's pages, in nav order. Home is the wordmark, so it is not
+   repeated here. */
+export const NAV = [
+  { to: '/about', label: 'About' },
+  { to: '/consulting', label: 'Consulting' },
+  { to: '/experience', label: 'Experience' },
+  { to: '/case-study', label: 'Case Study' },
+  { to: '/contact', label: 'Contact' },
 ]
 
 /* "About STEPHEN", as supplied, plus the qualifications sentence from the
@@ -323,6 +323,102 @@ export const CREDENTIALS = [
     body: 'Professional formation on how to detect money-laundering activities from stakeholders associated with the finance sector.',
   },
 ]
+
+/* ── Case study ──────────────────────────────────────────────
+ *
+ * Supplied by the client. Wording is unchanged apart from spelling
+ * normalised to the British forms used across the rest of the site
+ * (analysed, organisation). The mixed "I"/"we" voice is as supplied —
+ * see README.
+ */
+export const CASE_STUDY = {
+  slug: 'schedule-recovery',
+  kicker: 'Case Study',
+  title: 'Turning a 15% project delay into a controlled recovery strategy',
+  dek: 'When a project falls behind, the answer isn’t always “work faster”.',
+  summary:
+    'A project 15% behind schedule, a sponsor who wanted overtime, a finance manager who could not fund it, and a PMO that required formal analysis first — resolved with a structured impact analysis rather than a rushed intervention.',
+
+  opening: [
+    'A client came to me with a project that was 15% behind schedule. Pressure was building.',
+    'The project sponsor believed extensive overtime could recover the lost time. The finance manager disagreed, warning that the project budget could not absorb significant additional costs. At the same time, the PMO required any recovery strategy to be formally analysed and approved before implementation.',
+    'Three stakeholders. Three legitimate concerns.',
+    'My job was to bring those perspectives together and identify a recovery strategy that protected the organisation’s overall interests.',
+  ],
+
+  challenge: {
+    label: 'The challenge',
+    heading: '15% behind schedule. Limited budget. Increasing pressure.',
+    body: [
+      'The project leadership team was facing a difficult decision: how could the project recover lost time without creating unacceptable cost or risk?',
+      'The obvious temptation was to act immediately — add overtime, accelerate activities, or compress the schedule. But acting before understanding the consequences could simply move the problem from one area of the project to another.',
+      'I therefore recommended a structured recovery assessment before committing to a specific intervention.',
+    ],
+  },
+
+  options: {
+    label: 'The analysis',
+    heading: 'We considered four recovery options',
+    intro: 'I deliberately examined the alternatives rather than jumping to the first solution.',
+    items: [
+      {
+        n: '01',
+        title: 'Review the critical path',
+        body: ['I considered examining the critical path to identify activities that could be:'],
+        points: ['resequenced;', 'shortened;', 'moved;', 'overlapped;', 'reduced in scope where appropriate.'],
+        after: [
+          'This could potentially create schedule recovery opportunities. However, changing activities without understanding their dependencies and downstream consequences could introduce new risks.',
+        ],
+      },
+      {
+        n: '02',
+        title: 'Fast-track or crash the schedule',
+        body: [
+          'I considered traditional schedule-compression techniques. Fast-tracking could potentially shorten the schedule by overlapping activities that were originally planned sequentially. Crashing could increase resources assigned to critical activities to accelerate completion.',
+          'However, these approaches presented important questions: what would they cost? What additional risks would they introduce? Could the existing budget support them?',
+          'Given Finance’s concerns, these options could not responsibly be implemented without further analysis.',
+        ],
+      },
+      {
+        n: '03',
+        title: 'Maintain the original schedule',
+        body: [
+          'I also considered maintaining the current schedule on the assumption that the project might recover time later. However, this depended on an uncertain future opportunity.',
+          'For a project already 15% behind schedule, simply hoping that additional schedule flexibility would appear later was not a sufficiently robust recovery strategy.',
+        ],
+      },
+      {
+        n: '04',
+        title: 'Structured impact analysis',
+        selected: true,
+        body: [
+          'I recommended conducting a structured impact analysis and presenting management with clearly defined recovery options showing their schedule impact, cost impact and risk impact.',
+          'This was the approach we selected.',
+        ],
+      },
+    ],
+  },
+
+  approach: {
+    label: 'What this says about my consulting approach',
+    question: 'How do I get the project finished faster?',
+    answer:
+      'How do I recover the project intelligently while protecting the organisation’s broader objectives?',
+  },
+
+  why: {
+    label: 'Why clients engage me',
+    body: [
+      'Complex projects rarely fail because there are no possible solutions. They become difficult when teams don’t know which solution provides the best overall outcome.',
+      'That is where NIBA project management consulting expertise creates value. I help organisations turn uncertainty into structured decisions, competing stakeholder expectations into alignment, and project challenges into practical recovery strategies.',
+    ],
+  },
+
+  cta: {
+    heading: 'Is your project behind schedule?',
+    body: 'Don’t wait until schedule pressure becomes a cost, risk or quality problem. Contact me about your project challenge — let’s assess the situation, evaluate your options, and build a practical path forward.',
+  },
+}
 
 /* ── Photographic bands ──────────────────────────────────────
  *

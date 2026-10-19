@@ -135,29 +135,51 @@ const remote = [
 check('no remote assets in markup', remote.length === 0, remote.join(' '))
 check('no Google Fonts', !/fonts\.(googleapis|gstatic)\.com/.test(corpus))
 
-/* ══ 3 · scroll state ══════════════════════════════════════════ */
+/* ══ 3 · pages and routing ═════════════════════════════════════ */
+
+console.log('\n── pages ' + '─'.repeat(57))
+
+const ROUTES = ['/about', '/consulting', '/experience', '/case-study', '/contact']
+const appSource = readFileSync(join(ROOT, 'src/App.jsx'), 'utf8')
+
+check('every nav link has a route',
+  C.NAV.every((n) => appSource.includes(`path="${n.to}"`)),
+  C.NAV.map((n) => n.to).join(' '))
+check('nav covers every inner page',
+  ROUTES.every((r) => C.NAV.some((n) => n.to === r)))
+check('home route exists', appSource.includes('path="/"'))
+check('unknown paths fall back', appSource.includes('path="*"'))
+
+for (const f of ['Home', 'About', 'Consulting', 'Experience', 'CaseStudy', 'Contact']) {
+  check(`page ${f}.jsx exists`, existsSync(join(ROOT, 'src/pages', `${f}.jsx`)))
+}
+
+// Without this, a visitor opening a deep link directly gets a 404 on
+// Netlify instead of the app.
+const redirects = join(ROOT, 'public/_redirects')
+check('SPA redirect file is published', existsSync(redirects))
+if (existsSync(redirects)) {
+  check('redirect sends all paths to index.html',
+    /\/\*\s+\/index\.html\s+200/.test(readFileSync(redirects, 'utf8')))
+}
+
+console.log('\n── case study ' + '─'.repeat(52))
+check('case study has four options', C.CASE_STUDY.options.items.length === 4)
+check('exactly one option is marked selected',
+  C.CASE_STUDY.options.items.filter((o) => o.selected).length === 1)
+check('case study has a call to action',
+  Boolean(C.CASE_STUDY.cta.heading && C.CASE_STUDY.cta.body))
 
 console.log('\n── scroll state ' + '─'.repeat(50))
 
 const VH = 720
-const SECS = [
-  ['home', 0, 720], ['about', 720, 1300], ['consulting', 2020, 1100],
-  ['experience', 3120, 2600], ['values', 5720, 1100], ['credentials', 6820, 1080],
-  ['contact', 7900, 700],
-]
 const DOC = 8600
-
 globalThis.window = { innerHeight: VH, scrollY: 0 }
 globalThis.document = { body: { scrollHeight: DOC } }
 
-const { store, registerSection, readScroll } = await import('../src/store.js')
-SECS.forEach(([, top, h], i) => registerSection(i, { offsetTop: top, offsetHeight: h }))
-
+const { store, readScroll } = await import('../src/store.js')
 const at = (y) => { window.scrollY = y; readScroll(); return { ...store } }
 
-SECS.forEach(([id, top, h], i) => {
-  check(`${id} active at its centre`, at(top + h / 2 - VH / 2).active === i)
-})
 check('progress 0 at top', at(0).progress === 0)
 check('progress 1 at bottom', Math.abs(at(DOC - VH).progress - 1) < 1e-9)
 

@@ -1,14 +1,14 @@
 import { Fragment } from 'react'
-import Section from '../components/Section'
+import Page from '../components/Page'
 import Reveal from '../components/Reveal'
 import Band from '../components/Band'
 import { EXPERIENCE, BANDS } from '../data/content'
 
 /**
  * One entry per role. The left column carries the identity of the role —
- * title, organisation, place, dates — and the right column carries what was
- * done there, either as a list of responsibilities or, for the entries that
- * came without dates, as a short note.
+ * title, organisation, place, dates — and the right column what was done
+ * there, either as responsibilities or, for entries that came without
+ * dates, as a short note.
  */
 function Entry({ item }) {
   return (
@@ -17,7 +17,7 @@ function Entry({ item }) {
       style={{ borderColor: 'var(--rule)' }}
     >
       <div className="col-span-12 md:col-span-5">
-        <h4 className="display-md t-ink text-[clamp(1.2rem,2vw,1.7rem)]">{item.role}</h4>
+        <h3 className="display-md t-ink text-[clamp(1.2rem,2vw,1.7rem)]">{item.role}</h3>
         {item.org && <p className="meta t-ochre mt-[8px]">{item.org}</p>}
         {item.place && <p className="meta mt-[2px]">{item.place}</p>}
         {(item.dates || item.type) && (
@@ -47,34 +47,29 @@ function Entry({ item }) {
 
 export default function Experience() {
   return (
-    <Section index={3} id="experience" className="px-[6vw] py-[12vh]">
-      {/* A deeper tint behind the whole section gives the page rhythm.
-          It bleeds past the section box so it reaches both window edges;
-          html clips the overflow. */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-y-0 -z-10"
-        style={{ left: '-15vw', right: '-15vw', backgroundColor: 'rgb(234 226 212 / 0.72)' }}
-      />
+    <Page
+      title="Experience"
+      description="Roles across oil and gas decommissioning, construction logistics, procurement and supply chain, agile product ownership and AI in healthcare — Scotland, Denmark and Cameroon."
+    >
+      <section className="px-[6vw] pt-[6vh] pb-[10vh]">
+        <Band {...BANDS.experience} as="h1" />
 
-      <Band {...BANDS.experience} />
+        {EXPERIENCE.map((group) => (
+          <Fragment key={group.group}>
+            {group.group === 'Project Work' && <Band {...BANDS.logistics} as="h2" />}
 
-      {EXPERIENCE.map((group, gi) => (
-        <Fragment key={group.group}>
-          {/* The logistics band introduces the construction project work. */}
-          {group.group === 'Project Work' && <Band {...BANDS.logistics} as="h3" />}
-
-          <div className="mb-[4vh]">
-            <Reveal className="mb-[16px] mt-[4vh]">
-              <h3 className="eyebrow t-ochre">{group.group}</h3>
-            </Reveal>
-            {group.items.map((item) => (
-              <Entry key={item.role + (item.org ?? '') + (item.dates ?? '')} item={item} />
-            ))}
-            <div className="rule-h" />
-          </div>
-        </Fragment>
-      ))}
-    </Section>
+            <div className="mb-[4vh]">
+              <Reveal className="mb-[16px] mt-[4vh]">
+                <h2 className="eyebrow t-ochre">{group.group}</h2>
+              </Reveal>
+              {group.items.map((item) => (
+                <Entry key={item.role + (item.org ?? '') + (item.dates ?? '')} item={item} />
+              ))}
+              <div className="rule-h" />
+            </div>
+          </Fragment>
+        ))}
+      </section>
+    </Page>
   )
 }

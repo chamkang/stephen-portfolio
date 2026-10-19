@@ -1,6 +1,19 @@
 # Stephen Niba — Portfolio
 
-A single-page portfolio site: React, Tailwind CSS, Vite.
+A six-page portfolio site: React, React Router, Tailwind CSS, Vite.
+
+| Page | Path |
+| --- | --- |
+| Home — masthead, consulting summary, case study teaser, call to action | `/` |
+| About — profile, vision, mission, core values, credentials | `/about` |
+| Coaching & Consulting — the five areas | `/consulting` |
+| Experience — professional, project and academic | `/experience` |
+| Case Study — the 15% schedule recovery | `/case-study` |
+| Contact | `/contact` |
+
+It was a single page until the content outgrew it: the home page alone had
+reached ~14,500px. The case study in particular needs its own address so it
+can be sent to a prospect directly.
 
 ```bash
 npm install
@@ -56,6 +69,17 @@ if it should change back. `npm run verify` fails if PMP wording reappears.
 - The new copy names the firm **NIBA Consulting**, but the rest of the site
   is presented as Stephen Niba personally. Confirm whether the header and
   page title should carry the firm name.
+
+## The case study
+
+Supplied by the client and kept in his words. Two things to confirm:
+
+- **Voice.** It moves between "I" and "we" ("I deliberately examined…",
+  "We considered four recovery options", "This was the approach we
+  selected"). Left as supplied. For a solo consultancy, "I" throughout
+  would read more consistently.
+- **Spelling.** It arrived in US spelling (analyzed, organization) and was
+  normalised to the British forms used everywhere else on the site.
 
 ## Photography
 
@@ -116,27 +140,37 @@ Netlify Forms).
 
 ```
 src/
-  App.jsx
-  main.jsx
+  App.jsx               routes
+  main.jsx              fonts, router
   index.css             palette, type, photo treatments
-  store.js              scroll progress + active section
-  data/content.js       every word on the page
+  store.js              reading progress for the header rule
+  data/content.js       every word on the site
   components/
-    Band.jsx            photographic section header with text on the image
+    Header.jsx          wordmark, page nav, call to action, progress rule
+    Footer.jsx          contact details and page links
+    Page.jsx            per-page title/description, scrolls to top
+    PageHeading.jsx     the standard opening of an inner page
+    Band.jsx            photographic header with text on the image
     Reveal.jsx          reveal-on-scroll
     ScrollDriver.jsx    smooth scroll loop
-    Section.jsx         registers sections for the index
-    Shell.jsx           header, left section index, progress rule
-  sections/             Masthead, About, Consulting, Projects,
-                        Values, Credentials, Contact
+    WhatsAppButton.jsx  floating chat button
+  pages/                Home, About, Consulting, Experience,
+                        CaseStudy, Contact
 public/img/             photographs (all local)
+public/_redirects       sends every path to index.html (see below)
 scripts/verify.mjs      checks
 ```
 
+**`public/_redirects` matters.** The site is a single-page app: the browser
+handles the routes, not the server. Without that file, a visitor opening
+`/case-study` directly — exactly what happens when the link is shared — gets
+a 404 from Netlify. The file is published with the site; `npm run verify`
+fails if it goes missing.
+
 ## Checks
 
-`npm run verify` asserts that the email, location, vision, mission and core
-values match the brief; that previously removed invented wording has not
-returned; that every referenced image exists locally; that no asset is
-loaded from a third party; and that the scroll state tracks sections
-correctly.
+`npm run verify` asserts that the email, location, phone, vision, mission,
+core values and credentials match the brief; that previously removed or
+invented wording has not returned; that every nav link has a route and every
+page file exists; that the SPA redirect is in place; that every referenced
+image exists locally; and that no asset is loaded from a third party.
