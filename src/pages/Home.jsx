@@ -7,10 +7,14 @@ import { IDENTITY, BIO, MISSION, CONSULTING, CASE_STUDY, CREDENTIALS } from '../
 
 const FULL_NAME = `${IDENTITY.first} ${IDENTITY.last}`
 
+/* These are tall photographs shown in a wide panel, so most of the height
+   is cropped away. The vertical figure is how far down the crop starts —
+   keep it low enough that the top of his head always survives, including
+   in the shorter stacked panel on a phone. */
 const PORTRAITS = [
-  { src: '/img/stephen-standing.jpg', alt: `${FULL_NAME} standing in a navy suit`, position: '50% 18%' },
-  { src: '/img/stephen-portrait.jpg', alt: `Portrait of ${FULL_NAME}`, position: '50% 14%' },
-  { src: '/img/stephen-seated.jpg', alt: `${FULL_NAME} seated, smiling`, position: '50% 22%' },
+  { src: '/img/stephen-standing.jpg', alt: `${FULL_NAME} standing in a navy suit`, position: '50% 12%' },
+  { src: '/img/stephen-portrait.jpg', alt: `Portrait of ${FULL_NAME}`, position: '50% 10%' },
+  { src: '/img/stephen-seated.jpg', alt: `${FULL_NAME} seated, smiling`, position: '50% 3%' },
 ]
 
 const TICKER = [
